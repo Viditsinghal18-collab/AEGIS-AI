@@ -1,0 +1,122 @@
+{
+  "target": "example.com",
+  "normalized_url": "https://example.com",
+  "hostname": "example.com",
+  "assessment_time": "2026-09-20T11:22:32.667273+00:00",
+  "resolved_ip": "172.66.147.243",
+  "ssl_telemetry": {
+    "enabled": true,
+    "tls_version": "TLSv1.3",
+    "cipher_suite": "TLS_AES_256_GCM_SHA384",
+    "cipher_bits": 256,
+    "issuer": "Trusted / Hidden",
+    "subject": "example.com",
+    "valid_to": "Active"
+  },
+  "headers_telemetry": {
+    "status_code": 200,
+    "evaluated_headers": {
+      "Strict-Transport-Security": {
+        "present": false,
+        "value": null
+      },
+      "Content-Security-Policy": {
+        "present": false,
+        "value": null
+      },
+      "X-Frame-Options": {
+        "present": false,
+        "value": null
+      },
+      "X-Content-Type-Options": {
+        "present": false,
+        "value": null
+      },
+      "Referrer-Policy": {
+        "present": false,
+        "value": null
+      },
+      "Permissions-Policy": {
+        "present": false,
+        "value": null
+      }
+    },
+    "redirect_chain": [
+      "https://example.com/"
+    ]
+  },
+  "server_fingerprint": {
+    "server_banner": "cloudflare",
+    "framework": "Not Broadcasted",
+    "cloud_cdn_waf": "Cloudflare Edge Shield",
+    "disclosed_technologies": [
+      "No direct framework leaks detected"
+    ]
+  },
+  "findings": [
+    {
+      "id": "HDR-STRICT_TRANSPORT_SECURITY",
+      "title": "Missing HSTS (HTTP Strict Transport Security)",
+      "severity": "HIGH",
+      "deduction": 15,
+      "category": "Web Security Headers",
+      "details": "The HTTP response does not include the standard 'Strict-Transport-Security' header.",
+      "remediation": "Add 'Strict-Transport-Security: max-age=31536000; includeSubDomains; preload' in web server config."
+    },
+    {
+      "id": "HDR-CONTENT_SECURITY_POLICY",
+      "title": "Missing Content-Security-Policy (CSP)",
+      "severity": "HIGH",
+      "deduction": 15,
+      "category": "Client-Side Protection",
+      "details": "The HTTP response does not include the standard 'Content-Security-Policy' header.",
+      "remediation": "Define a robust CSP header to prevent Cross-Site Scripting (XSS) and unauthorized data injection."
+    },
+    {
+      "id": "HDR-X_FRAME_OPTIONS",
+      "title": "Missing Clickjacking Defense (X-Frame-Options)",
+      "severity": "MEDIUM",
+      "deduction": 10,
+      "category": "Web Security Headers",
+      "details": "The HTTP response does not include the standard 'X-Frame-Options' header.",
+      "remediation": "Set 'X-Frame-Options: DENY' or 'SAMEORIGIN' to block framing/clickjacking attacks."
+    },
+    {
+      "id": "HDR-X_CONTENT_TYPE_OPTIONS",
+      "title": "Missing MIME-Sniffing Protection (X-Content-Type-Options)",
+      "severity": "LOW",
+      "deduction": 5,
+      "category": "Web Security Headers",
+      "details": "The HTTP response does not include the standard 'X-Content-Type-Options' header.",
+      "remediation": "Add 'X-Content-Type-Options: nosniff' header."
+    },
+    {
+      "id": "HDR-REFERRER_POLICY",
+      "title": "Missing Referrer-Policy",
+      "severity": "LOW",
+      "deduction": 5,
+      "category": "Privacy & Leakage",
+      "details": "The HTTP response does not include the standard 'Referrer-Policy' header.",
+      "remediation": "Set 'Referrer-Policy: strict-origin-when-cross-origin' to prevent URL data leaks."
+    },
+    {
+      "id": "HDR-PERMISSIONS_POLICY",
+      "title": "Missing Permissions-Policy (Feature-Policy)",
+      "severity": "LOW",
+      "deduction": 5,
+      "category": "Browser Capabilities",
+      "details": "The HTTP response does not include the standard 'Permissions-Policy' header.",
+      "remediation": "Restrict browser features like camera, microphone, and geolocation via Permissions-Policy header."
+    }
+  ],
+  "score": 45,
+  "grade": "D",
+  "summary": {
+    "critical": 0,
+    "high": 2,
+    "medium": 1,
+    "low": 3,
+    "total_issues": 6,
+    "posture_status": "Critical Exposure"
+  }
+}

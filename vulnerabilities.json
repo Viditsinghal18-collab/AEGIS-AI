@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-09-20T15:41:59.520544+00:00",
+  "target": "127.0.0.1:3000",
+  "fingerprinted_technologies": [
+    "express"
+  ],
+  "total_vulnerabilities_found": 5,
+  "vulnerabilities": [
+    {
+      "vuln_id": "GHSA-cm5g-3pgc-8rg4",
+      "cve_aliases": [
+        "CVE-2024-10491"
+      ],
+      "affected_component": "express",
+      "summary": "Express ressource injection",
+      "severity_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:N/A:N",
+      "published": "2024-10-29T18:30:37Z",
+      "database_specific": "MODERATE"
+    },
+    {
+      "vuln_id": "GHSA-gpvr-g6gh-9mc2",
+      "cve_aliases": [
+        "CVE-2014-6393"
+      ],
+      "affected_component": "express",
+      "summary": "No Charset in Content-Type Header in express",
+      "severity_vector": "CVSS:3.0/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+      "published": "2018-10-23T17:22:54Z",
+      "database_specific": "MODERATE"
+    },
+    {
+      "vuln_id": "GHSA-jj78-5fmv-mv28",
+      "cve_aliases": [
+        "CVE-2024-9266"
+      ],
+      "affected_component": "express",
+      "summary": "Express Open Redirect vulnerability",
+      "severity_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:N/A:N",
+      "published": "2024-10-03T21:31:05Z",
+      "database_specific": "LOW"
+    },
+    {
+      "vuln_id": "GHSA-qw6h-vgh9-j6wx",
+      "cve_aliases": [
+        "CVE-2024-43796"
+      ],
+      "affected_component": "express",
+      "summary": "express vulnerable to XSS via response.redirect()",
+      "severity_vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:L",
+      "published": "2024-09-10T19:41:04Z",
+      "database_specific": "LOW"
+    },
+    {
+      "vuln_id": "GHSA-rv95-896h-c2vc",
+      "cve_aliases": [
+        "CVE-2024-29041"
+      ],
+      "affected_component": "express",
+      "summary": "Express.js Open Redirect in malformed URLs",
+      "severity_vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+      "published": "2024-03-25T19:40:26Z",
+      "database_specific": "MODERATE"
+    }
+  ]
+}

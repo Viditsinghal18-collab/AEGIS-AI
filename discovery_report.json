@@ -1,0 +1,47 @@
+{
+  "scan_time": "2026-09-20T15:41:58.424778+00:00",
+  "discovered_assets": [
+    {
+      "host": "127.0.0.1",
+      "port": 80,
+      "protocol": "tcp",
+      "state": "closed",
+      "service": "http",
+      "product": "",
+      "version": ""
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 443,
+      "protocol": "tcp",
+      "state": "closed",
+      "service": "https",
+      "product": "",
+      "version": ""
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 3000,
+      "protocol": "tcp",
+      "state": "open",
+      "service": "ppp",
+      "product": "",
+      "version": ""
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 8080,
+      "protocol": "tcp",
+      "state": "closed",
+      "service": "http-proxy",
+      "product": "",
+      "version": ""
+    }
+  ],
+  "http_fingerprint": {
+    "url": "http://localhost:3000",
+    "status_code": 200,
+    "server_header": "None",
+    "powered_by": "None"
+  }
+}
