@@ -1,0 +1,9 @@
+# Core Web Application & REST API
+Flask>=3.0.0
+
+# Network Reconnaissance & Port Auditing
+python-nmap>=0.7.1
+
+# HTTP Telemetry & Live Threat Intelligence
+requests>=2.31.0
+urllib3>=2.0.0
