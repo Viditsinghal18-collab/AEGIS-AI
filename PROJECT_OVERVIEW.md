@@ -25,38 +25,42 @@ AEGIS-AI introduces a multi-dimensional triage model that cross-references:
 
 ## 2. End-to-End System Architecture
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                              AEGIS-AI ARCHITECTURAL PIPELINE                           │
-└────────────────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph Recon["Ingestion & Attack Surface Telemetry"]
+        A[Target Host / Network\n127.0.0.1:3000] --> B[Perimeter Prober\ndiscovery.py]
+        C[Public Web Target URL\ne.g., owasp.org] --> D[Universal Online Auditor\nscanner_online.py]
+        B --> E[Port Scanner & Service Fingerprinter\nTCP SYN / HTTP Probes]
+        D --> F[SSL / Security Headers / WAF Analyzer\nGrade A+ to F Deductions]
+        E --> G[(Discovery Cache\ndiscovery_report.json)]
+        F --> H[(Online Audit Cache\nonline_assessment_report.json)]
+    end
 
- [1. PERIMETER PROBE]           [2. VULNERABILITY INGESTION]        [3. LIVE THREAT INTELLIGENCE]
- ┌──────────────────────┐       ┌──────────────────────┐            ┌──────────────────────────┐
- │  discovery.py        │       │  correlate.py        │            │  FIRST.org EPSS API      │
- │  • Nmap -sV Probe    │       │  • Google OSV API    │            │  • Live Weaponization %  │
- │  • Port 3000 / HTTP  │──────►│  • Package CVE Query │◄───────────┤  • CISA KEV BOD 22-01    │
- │  • Service Fingerpr. │       │  • Schema Normaliz.  │            │  • MITRE ATT&CK TTPs     │
- └──────────────────────┘       └──────────────────────┘            └──────────────────────────┘
-           │                               │                                     │
-           ▼                               ▼                                     ▼
- ┌────────────────────────────────────────────────────────────────────────────────────────┐
- │ 4. EXPLAINABLE RISK-BASED VULNERABILITY MANAGEMENT (RBVM) ENGINE (prioritize.py)      │
- │    Risk = (α · CVSS) + (β · Reachability) + (γ · EPSS_Percentile) + (δ · Criticality)  │
- │    • Ingress Reachability Scoring: Port 3000 Open (9.5) vs Internal Closed (2.5)       │
- │    • AST Runtime Call-Graph Synthesizer: Socket Ingress ➔ Express.js Route ➔ Handler  │
- │    • Output: prioritized_report.json                                                  │
- └────────────────────────────────────────────────────────────────────────────────────────┘
-                                           │
-                                           ▼
- ┌────────────────────────────────────────────────────────────────────────────────────────┐
- │ 5. CYBER SOC EXECUTIVE WEB PORTAL (app.py + templates/index.html)                      │
- │    • 4-Quadrant Threat Exposure Matrix (Bubble Plot: EPSS vs CVSS vs Port Reachability)│
- │    • 5-Axis Exploitability Spider Radar (Traditional Blind CVSS vs AEGIS RBVM Score)   │
- │    • Universal Online Web Assessor (scanner_online.py: SSL, Headers, WAF, Geo-IP)      │
- │    • Force-Directed Attack Surface Topology Graph (HTML5 Canvas Particle Simulation)   │
- │    • MITRE ATT&CK Enterprise Matrix & Multi-Framework Compliance (NIST / PCI-DSS)      │
- │    • Interactive Mitigation Sandbox & Attack Path Replay Simulator                     │
- └────────────────────────────────────────────────────────────────────────────────────────┘
+    subgraph ThreatIntel["Threat Intelligence & Correlation Pipeline"]
+        G --> I[Vulnerability Correlator\ncorrelate.py]
+        J[Google OSV API\napi.osv.dev] -->|Package Advisories & GHSA| I
+        K[NIST NVD Database] -->|CVSS Base Metrics| I
+        I --> L[(Correlated Vulnerabilities\nvulnerabilities.json)]
+    end
+
+    subgraph Agents["AI Risk Engine & XAI AST Prioritizer"]
+        L & G --> M[Explainable RBVM Engine\nprioritize.py]
+        N[FIRST.org EPSS API\napi.first.org/data/v1/epss] -->|Live Exploit Probability| M
+        O[CISA KEV Catalog\nBOD 22-01 Mandates] -->|Weaponized In-The-Wild Alert| M
+        P[MITRE ATT&CK Matrix] -->|Adversary TTPs T1190/T1595| M
+        
+        M --> Q[AST Runtime Call-Graph Synthesizer\nSocket Ingress ➔ Route ➔ Handler]
+        Q -->|Reachability Weighting| R[(Prioritized Intelligence\nprioritized_report.json)]
+    end
+
+    subgraph Application["API & Cyber SOC Web Console"]
+        R & H --> S[Flask Async REST API\napp.py]
+        S --> T[Executive Cyber SOC Web Cockpit\ntemplates/index.html]
+        T --> U[4-Quadrant Threat Exposure Matrix\nBubble Plot: EPSS vs CVSS]
+        T --> V[5-Axis Multi-Vector Attack Radar\nSpider Chart: Traditional vs AEGIS]
+        T --> W[Force-Directed Attack Surface Topology\nHTML5 Canvas Particle Stream]
+        T --> X[MITRE ATT&CK & Compliance Matrix\nNIST CSF 2.0 / PCI-DSS 4.0]
+    end
 ```
 
 ---
